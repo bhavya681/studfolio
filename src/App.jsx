@@ -1,80 +1,50 @@
-import React, { useState, useRef } from "react";
-import ESignPad from "./components/ESignPad";
-import ColorPicker from "./components/ColorPicker";
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Esign from './pages/Esign';
+import ResumeBuilder from './pages/ResumeBuilder';
+import QuestionBankGenerator from './pages/QuestionBankGenerator';
+import AISummarizer from './pages/AISummarizer';
+import Header from './components/Header';
+import Contact from './pages/Contact';
+import StudyPlanner from './pages/StudyPlanner';
+import GradeTracker from './pages/GradeTracker';
 
-const App = () => {
-  const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
-  const [textColor, setTextColor] = useState("#000000");
-  const [fontSize, setFontSize] = useState("16px");
+const Home = () => (
+<>
 
-  const sigCanvas = useRef(null);
-
-  const handleBackgroundColorChange = (color) => {
-    setBackgroundColor(color);
-  };
-
-  const handleTextColorChange = (color) => {
-    setTextColor(color);
-  };
-
-  const handleFontSizeChange = (e) => {
-    setFontSize(e.target.value);
-  };
-
-
-  const downloadSignature = () => {
-    const canvas = sigCanvas.current.getCanvas();
-    if (!canvas) {
-      console.error("Canvas not found.");
-      return;
-    }
-    const imageURL = canvas.toDataURL("image/png");
-    const link = document.createElement("a");
-    link.href = imageURL;
-    link.download = "signature.png";
-    link.click();
-  };
-
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">E-Signature Board</h1>
-
-      <div className="max-w-xl w-full bg-white rounded-lg shadow-md p-8 mb-8"  style={{backgroundColor:"#282A35"}}>
-        <div className="flex justify-center">
-          <div className="w-full">
-            <ESignPad
-              backgroundColor={backgroundColor}
-              textColor={textColor}
-              fontSize={fontSize}
-              forwardedRef={sigCanvas}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="flex items-center space-x-4">
-        <ColorPicker color={backgroundColor} onChange={handleBackgroundColorChange} />
-        <ColorPicker color={textColor} onChange={handleTextColorChange} />
-        <select
-          className="px-4 py-2 bg-gray-200 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          value={fontSize}
-          onChange={handleFontSizeChange}
-        >
-          <option value="10px">10px</option>
-          <option value="20px">20px</option>
-          <option value="30px">30px</option>
-          <option value="40px">40px</option>
-          <option value="50px">50px</option>
-        </select>
-        <button
-          className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-          onClick={downloadSignature}
-        >
-          Download Signature
-        </button>
-
+<div className="bg-gradient-to-r from-blue-400 to-purple-500 min-h-screen flex flex-col justify-center items-center text-white">
+      <h1 className="text-4xl font-bold mb-8">Welcome to MyApp!</h1>
+      <p className="text-lg mb-8">Empowering Students to Excel</p>
+      <div className="flex space-x-4">
+        <Link to="/resume-builder" className="bg-white text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-2 px-4 rounded-md">
+          Build Your Resume
+        </Link>
+        <Link to="/question-bank" className="bg-white text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-2 px-4 rounded-md">
+          Generate Questions
+        </Link>
       </div>
     </div>
+
+</>
+);
+
+const App = () => {
+
+  return (
+    <>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/e-sign" element={<Esign />} />
+          <Route path="/resume-builder" element={<ResumeBuilder />} />
+          <Route path="/question-bank" element={<QuestionBankGenerator />} />
+          <Route path="/ai-summarizer" element={<AISummarizer />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/study-plan" element={<StudyPlanner />} />
+          <Route path="/grade-tracker" element={<GradeTracker />} />
+        </Routes>
+      </Router>
+    </>
   );
 };
 

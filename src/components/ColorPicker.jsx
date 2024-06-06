@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ChromePicker } from "react-color";
 
 const ColorPicker = ({ color, onChange }) => {
