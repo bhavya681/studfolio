@@ -1,4 +1,3 @@
-// src/components/GradeTracker.js
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -28,33 +27,33 @@ const GradeTracker = () => {
   };
 
   return (
-    <div className="max-w-2xl mt-[25rem] mx-auto p-6  bg-gray-300 rounded-lg shadow-md">
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md min-h-[70vh]">
       <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Grade Tracker</h2>
-      <div className="flex mb-4">
+      <div className="mb-4 flex flex-col md:flex-row md:space-x-4">
         <input
           type="text"
           value={courseName}
           onChange={(e) => setCourseName(e.target.value)}
-          className="flex-grow border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:border-blue-500"
+          className="flex-grow border border-gray-300 rounded-md px-4 py-2 mb-2 md:mb-0 focus:outline-none focus:border-blue-500"
           placeholder="Course Name"
         />
         <input
           type="text"
           value={grade}
           onChange={(e) => setGrade(e.target.value)}
-          className="flex-grow border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:border-blue-500 ml-2"
+          className="flex-grow border border-gray-300 rounded-md px-4 py-2 mb-2 md:mb-0 focus:outline-none focus:border-blue-500"
           placeholder="Grade"
         />
         <button
           onClick={addCourse}
-          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-r-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 ml-2"
+          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
         >
           Add
         </button>
       </div>
-      <ul>
+      <ul className="mt-4">
         {courses.map(course => (
-          <li key={course.id} className="flex justify-between items-center bg-gray-100 border-b border-gray-200 py-4 px-6 mb-2">
+          <li key={course.id} className="flex justify-between items-center bg-gray-100 border border-gray-200 rounded-md py-3 px-4 mb-2">
             <span className="text-lg">{course.name}</span>
             <span className="text-lg font-semibold">{course.grade}</span>
             <button

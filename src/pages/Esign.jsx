@@ -4,23 +4,23 @@ import { ChromePicker } from 'react-color';
 
 const EsignPad = () => {
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
-  const [textColor, setTextColor] = useState('#000000');
-  const [fontSize, setFontSize] = useState('16px');
+  const [penColor, setPenColor] = useState('#000000');
+  const [penWidth, setPenWidth] = useState(2);
   const [showBackgroundColorPicker, setShowBackgroundColorPicker] = useState(false);
-  const [showTextColorPicker, setShowTextColorPicker] = useState(false);
-
+  const [showPenColorPicker, setShowPenColorPicker] = useState(false);
   const sigCanvas = useRef(null);
+  const [drawHistory, setDrawHistory] = useState([]);
 
   const handleBackgroundColorChange = (color) => {
     setBackgroundColor(color.hex);
   };
 
-  const handleTextColorChange = (color) => {
-    setTextColor(color.hex);
+  const handlePenColorChange = (color) => {
+    setPenColor(color.hex);
   };
 
-  const handleFontSizeChange = (e) => {
-    setFontSize(e.target.value);
+  const handlePenWidthChange = (e) => {
+    setPenWidth(parseInt(e.target.value));
   };
 
   const downloadSignature = () => {
@@ -38,38 +38,66 @@ const EsignPad = () => {
 
   const clearCanvas = () => {
     sigCanvas.current.clear();
+    setDrawHistory([]);
+  };
+
+  const undoLast = () => {
+    if (drawHistory.length === 0) return;
+    const newHistory = [...drawHistory];
+    newHistory.pop();
+    setDrawHistory(newHistory);
+    sigCanvas.current.clear();
+    newHistory.forEach((draw) => sigCanvas.current.fromDataURL(draw));
+  };
+
+  const handleEndStroke = () => {
+    const currentCanvas = sigCanvas.current.getTrimmedCanvas().toDataURL('image/png');
+    setDrawHistory((prevHistory) => [...prevHistory, currentCanvas]);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">E-Signature Board</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-gray-200 to-gray-400 p-4">
+      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">E-Signature Board</h1>
 
-      <div className="max-w-xl w-full bg-gray-700 rounded-lg shadow-md p-8 mb-8">
+      <div className="max-w-xl w-full bg-gray-800 rounded-lg shadow-md p-4 md:p-6 mb-8">
         <div className="flex justify-center">
           <div className="w-full">
-            <div className="shadow-xl rounded-xl">
+            <div className="shadow-xl rounded-xl overflow-hidden">
               <SignatureCanvas
                 ref={sigCanvas}
-                penColor={textColor}
-                canvasProps={{ width: 500, height: 200, style: { backgroundColor: backgroundColor,borderRadius:"13px" } }}
+                penColor={penColor}
+                canvasProps={{
+                  width: 300, // Changed to responsive width
+                  height: 200,
+                  style: { backgroundColor: backgroundColor, borderRadius: '13px', width: '100%' } // Ensure full width
+                }}
+                minWidth={penWidth}
+                maxWidth={penWidth}
+                onEnd={handleEndStroke}
               />
             </div>
-            <div className="flex justify-center items-center mt-4">
+            <div className="flex justify-center items-center mt-4 space-x-2 md:space-x-4">
               <button
                 onClick={clearCanvas}
-                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300"
+                className="px-3 py-2 md:px-4 md:py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300"
               >
                 Clear
+              </button>
+              <button
+                onClick={undoLast}
+                className="px-3 py-2 md:px-4 md:py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:border-yellow-300"
+              >
+                Undo
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center space-x-4">
+      <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
         <div className="relative">
           <div
-            className="w-10 h-10 rounded cursor-pointer shadow-md bg-gray-300"
+            className="w-8 h-8 md:w-10 md:h-10 rounded cursor-pointer shadow-md"
             style={{ backgroundColor: backgroundColor }}
             onClick={() => setShowBackgroundColorPicker(!showBackgroundColorPicker)}
           ></div>
@@ -79,31 +107,29 @@ const EsignPad = () => {
             </div>
           )}
         </div>
-        <div className="relative ">
+        <div className="relative">
           <div
-            className="w-10 h-10 rounded cursor-pointer shadow-md bg-gray-300"
-            style={{ backgroundColor: textColor }}
-            onClick={() => setShowTextColorPicker(!showTextColorPicker)}
+            className="w-8 h-8 md:w-10 md:h-10 rounded cursor-pointer shadow-md"
+            style={{ backgroundColor: penColor }}
+            onClick={() => setShowPenColorPicker(!showPenColorPicker)}
           ></div>
-          {showTextColorPicker && (
+          {showPenColorPicker && (
             <div className="absolute top-full left-0 mt-2 z-10">
-              <ChromePicker color={textColor} onChange={handleTextColorChange} />
+              <ChromePicker color={penColor} onChange={handlePenColorChange} />
             </div>
           )}
         </div>
         <select
-          className="px-4 py-2 bg-gray-200 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          value={fontSize}
-          onChange={handleFontSizeChange}
+          className="px-3 py-2 md:px-4 md:py-2 bg-gray-200 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          value={penWidth}
+          onChange={handlePenWidthChange}
         >
-          <option value="10px">10px</option>
-          <option value="20px">20px</option>
-          <option value="30px">30px</option>
-          <option value="40px">40px</option>
-          <option value="50px">50px</option>
+          <option value={2}>Thin</option>
+          <option value={5}>Medium</option>
+          <option value={10}>Thick</option>
         </select>
         <button
-          className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+          className="px-4 py-2 md:px-6 md:py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
           onClick={downloadSignature}
         >
           Download Signature
