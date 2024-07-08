@@ -14,6 +14,7 @@ import Documentation from "./pages/Documentation";
 import Footer from "./components/Footer";
 import Services from "./pages/Services";
 import SignUp from "./pages/SignUp";
+import UnityHubLogo from '../public/unityhub-high-resolution-logo-black-transparent.png'; 
 
 const Home = () => {
   return (
@@ -27,7 +28,7 @@ const Home = () => {
           >
             <img
               src={
-                "../public/unityhub-high-resolution-logo-black-transparent.png"
+                UnityHubLogo
               }
               alt="UnityHub"
               className="h-12 mr-2"
@@ -35,6 +36,7 @@ const Home = () => {
           </Link>
           <p className="text-lg md:text-xl mt-4 mb-8">
             Your platform for seamless productivity
+
           </p>
           <Link
             to="/contacts"
