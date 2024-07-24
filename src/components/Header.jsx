@@ -130,12 +130,12 @@ const Header = () => {
 
         {/* Desktop Navigation */}
     
-<nav className="hidden md:flex space-x-6">
+<nav className="hidden md:flex space-x-4">
   <NavLink to="/" text="Home" />
-  <NavLink to="/e-sign" text="E-Sign" title="E-Signature" />
+  <NavLink to="/e-sign" text="E-Sign" title="DocuSignPro" />
   <NavLink to="/smart-board" text="SB" title="Smart Board" />
   <NavLink to="/question-bank" text="QB" title="Question Bank" />
-  <NavLink to="/ai-summarizer" text="AI-S" title="AI Summarizer" />
+  <NavLink to="/ai-summarizer" text="AI-S" title="Text Summarizer" />
   <NavLink to="/expense-tracker" text="ET" title="Expense Tracker" />
   <NavLink to="/project-tracker" text="PT" title="Project Tracker" />
   <NavLink to="/invoice-generator" text="IG" title="Invoice Generator" />
@@ -145,8 +145,6 @@ const Header = () => {
   <NavLink to="/dictionary" text="Dict" title="Dictionary" />
 <NavLink to="/compress" text="Trans" title="Compressor" /> 
 </nav>
-
-
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
@@ -177,7 +175,7 @@ const Header = () => {
       <div className={`md:hidden absolute right-1 top-26 rounded-md bg-gray-600 w-56 ${menuOpen ? 'block' : 'hidden'}`} id="menu">
         <div className="px-2 pt-2 pb-3 space-y-1">
           <MobileNavLink to="/" text="Home" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/e-sign" text="E-Sign" toggleMenu={toggleMenu} />
+          <MobileNavLink to="/e-sign" text="DocuSignPro" toggleMenu={toggleMenu} />
           <MobileNavLink to="/smart-board" text="Smart Board" toggleMenu={toggleMenu} />
           <MobileNavLink to="/question-bank" text="Question Bank" toggleMenu={toggleMenu} />
           <MobileNavLink to="/ai-summarizer" text="AI Summarizer" toggleMenu={toggleMenu} />
@@ -195,12 +193,12 @@ const Header = () => {
   );
 };
 
-const NavLink = ({ to, text }) => (
+const NavLink = ({ to, text,title }) => (
   <Link
     to={to}
-    className="text-white hover:text-gray-200 transition duration-300 font-semibold text-lg"
+    className="text-white hover:text-gray-200 transition duration-300 font-semibold text-md"
   >
-    {text}
+    {title}
   </Link>
 );
 
