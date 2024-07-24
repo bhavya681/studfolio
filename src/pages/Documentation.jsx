@@ -6,6 +6,25 @@ const Documentation = () => {
       <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
         <h1 className="text-4xl text-center font-bold mb-12">Application Documentation</h1>
 
+        <p className="text-lg text-center mb-12">
+          Below are the titles for each section to help you navigate the documentation.
+        </p>
+
+        <div className="text-center mb-12 space-y-2">
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/e-sign</code> | E-Sign -> E-Signature</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/smart-board</code> | SB -> Smart Board</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/question-bank</code> | QB -> Question Bank</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/ai-summarizer</code> | AI-S -> AI Summarizer</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/expense-tracker</code> | ET -> Expense Tracker</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/project-tracker</code> | PT -> Project Tracker</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/invoice-generator</code> | IG -> Invoice Generator</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/study-plan</code> | SP -> Study Planner</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/grade-tracker</code> | GT -> Grade Tracker</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/passport-photo</code> | PP -> Passport Photo</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/dictionary</code> | Dict -> Dictionary</h1>
+          <h1>Route: <code className="bg-gray-200 p-1 rounded">/translate</code> | Trans -> Translate</h1>
+        </div>
+
         {/* Section for E-Sign Component */}
         <section className="mb-10">
           <h2 className="text-2xl font-bold mb-4">E-Sign Component</h2>

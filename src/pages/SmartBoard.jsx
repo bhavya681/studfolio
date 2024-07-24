@@ -1,15 +1,20 @@
-import  { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
-import jsPDF from "jspdf";
 
 const SmartBoard = () => {
   const [background, setBackground] = useState("white");
   const [lineColor, setLineColor] = useState("#000000");
   const [lineWidth, setLineWidth] = useState(3);
-  const [tool, setTool] = useState("pencil"); // Default tool is Pencil
+  const [tool, setTool] = useState("pencil");
   const canvasRef = useRef(null);
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      console.log("Canvas ref initialized.");
+    }
+  }, []);
 
   const toggleBackground = () => {
     const newBackground = background === "white" ? "black" : "white";
@@ -18,100 +23,49 @@ const SmartBoard = () => {
     setLineColor(newLineColor);
   };
 
-  const downloadNotes = () => {
-    html2canvas(canvasRef.current.canvasContainer.children[0]).then(
-      (canvas) => {
-        canvas.toBlob((blob) => {
-          saveAs(blob, "whiteboard_blackboard_notes.png");
-        });
+  const downloadNotes = async () => {
+    if (canvasRef.current) {
+      try {
+        const canvasData = await canvasRef.current.exportImage("png");
+        const response = await fetch(canvasData);
+        const blob = await response.blob();
+        saveAs(blob, "whiteboard_blackboard_notes.png");
+      } catch (error) {
+        console.error("Error capturing canvas for download:", error);
       }
-    );
-  };
-
-  const takeScreenshot = () => {
-    html2canvas(canvasRef.current.canvasContainer.children[0]).then(
-      (canvas) => {
-        const dataURL = canvas.toDataURL("image/png");
-        window.open(dataURL);
-      }
-    );
+    } else {
+      console.error("Invalid canvas reference.");
+    }
   };
 
   const clearCanvas = () => {
-    canvasRef.current.clearCanvas();
+    if (canvasRef.current) {
+      canvasRef.current.clearCanvas();
+    }
   };
 
   const undo = () => {
-    canvasRef.current.undo();
+    if (canvasRef.current) {
+      canvasRef.current.undo();
+    }
   };
 
   const selectTool = (selectedTool) => {
     setTool(selectedTool);
-  
-    // Handle setting drawing color based on selected tool
-    if (selectedTool === "pencil") {
-      setLineColor("#000000"); // Set default drawing color for pencil tool
-      canvasRef.current.canvas.drawingContext.globalCompositeOperation = "source-over";
-      canvasRef.current.canvas.style.cursor = "crosshair";
-    } else if (selectedTool === "eraser") {
-      setLineColor(background); // Set drawing color same as canvas background for eraser tool
-      canvasRef.current.canvas.drawingContext.globalCompositeOperation = "destination-out";
-      canvasRef.current.canvas.style.cursor = "cell"; // Custom cursor for eraser
-    } else {
-      // Reset to default settings for other tools
-      setLineColor("#000000"); // Set default drawing color for other tools if needed
-      canvasRef.current.canvas.drawingContext.globalCompositeOperation = "source-over";
-      canvasRef.current.canvas.style.cursor = "default";
-    }
-  };
-  
-
-  const setEraserCursor = () => {
-    setLineColor(background); // Set eraser color same as canvas background
-    canvasRef.current.canvas.drawingContext.globalCompositeOperation = "destination-out";
-    canvasRef.current.canvas.style.cursor = "cell"; // Custom cursor for eraser
-  };
-  
-
-  const createPDF = () => {
-    const doc = new jsPDF();
-    html2canvas(canvasRef.current.canvasContainer.children[0]).then(
-      (canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        doc.addImage(imgData, "PNG", 10, 10);
-        doc.save("board_notes.pdf");
-      }
-    );
-  };
-
-  const handleDrawShape = (shapeType) => {
     if (canvasRef.current) {
-      const canvas = canvasRef.current;
-      const context = canvas.canvas.drawingContext;
-
-      context.strokeStyle = lineColor;
-      context.lineWidth = lineWidth;
-      context.fillStyle = background;
-
-      switch (shapeType) {
-        case "rectangle":
-          context.fillRect(50, 50, 200, 100);
-          context.strokeRect(50, 50, 200, 100);
-          break;
-        case "circle":
-          context.beginPath();
-          context.arc(150, 150, 50, 0, 2 * Math.PI);
-          context.fill();
-          context.stroke();
-          break;
-        case "line":
-          context.beginPath();
-          context.moveTo(50, 50);
-          context.lineTo(200, 200);
-          context.stroke();
-          break;
-        default:
-          break;
+      const canvasContext = canvasRef.current.canvas.drawingContext;
+      if (selectedTool === "pencil") {
+        setLineColor("#000000");
+        canvasContext.globalCompositeOperation = "source-over";
+        canvasRef.current.canvas.style.cursor = "crosshair";
+      } else if (selectedTool === "eraser") {
+        setLineColor(background);
+        canvasContext.globalCompositeOperation = "destination-out";
+        canvasRef.current.canvas.style.cursor = "cell";
+      } else {
+        setLineColor("#000000");
+        canvasContext.globalCompositeOperation = "source-over";
+        canvasRef.current.canvas.style.cursor = "default";
       }
     }
   };
@@ -138,7 +92,7 @@ const SmartBoard = () => {
               Pencil
             </button>
             <button
-              onClick={setEraserCursor}
+              onClick={() => selectTool("eraser")}
               className={`px-6 py-3 rounded-lg shadow-lg transition-colors duration-300 ${
                 tool === "eraser"
                   ? "bg-red-600 text-white"
@@ -147,30 +101,6 @@ const SmartBoard = () => {
             >
               Eraser
             </button>
-            {/* <button
-              onClick={() => handleDrawShape('rectangle')}
-              className={`px-6 py-3 rounded-lg shadow-lg transition-colors duration-300 ${
-                tool === 'rectangle' ? 'bg-yellow-600 text-white' : 'bg-yellow-300 text-gray-700'
-              }`}
-            >
-              Rectangle
-            </button>
-            <button
-              onClick={() => handleDrawShape('circle')}
-              className={`px-6 py-3 rounded-lg shadow-lg transition-colors duration-300 ${
-                tool === 'circle' ? 'bg-purple-600 text-white' : 'bg-purple-300 text-gray-700'
-              }`}
-            >
-              Circle
-            </button>
-            <button
-              onClick={() => handleDrawShape('line')}
-              className={`px-6 py-3 rounded-lg shadow-lg transition-colors duration-300 ${
-                tool === 'line' ? 'bg-indigo-600 text-white' : 'bg-indigo-300 text-gray-700'
-              }`}
-            >
-              Line
-            </button> */}
             <button
               onClick={undo}
               className="px-6 py-3 bg-indigo-600 text-white rounded-lg shadow-lg hover:bg-indigo-800 transition-colors duration-300"
@@ -182,18 +112,6 @@ const SmartBoard = () => {
               className="px-6 py-3 bg-purple-600 text-white rounded-lg shadow-lg hover:bg-purple-800 transition-colors duration-300"
             >
               Download Notes
-            </button>
-            <button
-              onClick={takeScreenshot}
-              className="px-6 py-3 bg-yellow-600 text-white rounded-lg shadow-lg hover:bg-yellow-800 transition-colors duration-300"
-            >
-              Screenshot
-            </button>
-            <button
-              onClick={createPDF}
-              className="px-6 py-3 bg-gray-600 text-white rounded-lg shadow-lg hover:bg-gray-800 transition-colors duration-300"
-            >
-              Create PDF
             </button>
             <button
               onClick={clearCanvas}

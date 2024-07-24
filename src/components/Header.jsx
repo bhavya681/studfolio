@@ -129,18 +129,24 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          <NavLink to="/" text="Home" />
-          <NavLink to="/e-sign" text="E-Sign" />
-          <NavLink to="/smart-board" text="Smart Board" />
-          <NavLink to="/question-bank" text="Question Bank" />
-          <NavLink to="/ai-summarizer" text="AI Summarizer" />
-          <NavLink to="/expense-tracker" text="Expense Tracker" />
-          <NavLink to="/project-tracker" text="Project Tracker" />
-          <NavLink to="/invoice-generator" text="Invoice Generator" />
-          <NavLink to="/study-plan" text="Study Planner" />
-          <NavLink to="/grade-tracker" text="Grade Tracker" />
-        </nav>
+    
+<nav className="hidden md:flex space-x-6">
+  <NavLink to="/" text="Home" />
+  <NavLink to="/e-sign" text="E-Sign" title="E-Signature" />
+  <NavLink to="/smart-board" text="SB" title="Smart Board" />
+  <NavLink to="/question-bank" text="QB" title="Question Bank" />
+  <NavLink to="/ai-summarizer" text="AI-S" title="AI Summarizer" />
+  <NavLink to="/expense-tracker" text="ET" title="Expense Tracker" />
+  <NavLink to="/project-tracker" text="PT" title="Project Tracker" />
+  <NavLink to="/invoice-generator" text="IG" title="Invoice Generator" />
+  <NavLink to="/study-plan" text="SP" title="Study Planner" />
+  <NavLink to="/grade-tracker" text="GT" title="Grade Tracker" />
+  {/* <NavLink to="/passport-photo" text="PP" title="Passport Photo" /> */}
+  <NavLink to="/dictionary" text="Dict" title="Dictionary" />
+<NavLink to="/compress" text="Trans" title="Compressor" /> 
+</nav>
+
+
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
@@ -180,6 +186,9 @@ const Header = () => {
           <MobileNavLink to="/invoice-generator" text="Invoice Generator" toggleMenu={toggleMenu} />
           <MobileNavLink to="/study-plan" text="Study Planner" toggleMenu={toggleMenu} />
           <MobileNavLink to="/grade-tracker" text="Grade Tracker" toggleMenu={toggleMenu} />
+          {/* <MobileNavLink to="/passport-photo" text="Passport Photo" toggleMenu={toggleMenu} /> */}
+          <MobileNavLink to="/dictionary" text="Dictionary" toggleMenu={toggleMenu} />
+          <MobileNavLink to="/compress" text="Compressor" toggleMenu={toggleMenu} /> 
         </div>
       </div>
     </header>

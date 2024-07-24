@@ -15,6 +15,9 @@ import Footer from "./components/Footer";
 import Services from "./pages/Services";
 import SignUp from "./pages/SignUp";
 import UnityHubLogo from '../public/unityhub-high-resolution-logo-black-transparent.png'; 
+import PassportPhotoGenerator from "./pages/PassportPhotoGenerator";
+import Dictionary from "./pages/Dictionary";
+import Translator from "./pages/Translator";
 
 const Home = () => {
   return (
@@ -118,7 +121,7 @@ const Home = () => {
             />
           </div>
         </div>
-      </section>
+      </section>  
 
       {/* About Section */}
       <section className="py-16">
@@ -193,6 +196,9 @@ const App = () => {
           <Route path="/project-tracker" element={<Trail />} />
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/passport-photo" element={<PassportPhotoGenerator />} />
+          <Route path="/dictionary" element={<Dictionary />} />
+          <Route path="/compress" element={<Translator />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/contacts" element={<Contact />} />
         </Routes>
