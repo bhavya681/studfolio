@@ -103,10 +103,9 @@
 
 // export default Header;
 
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import UnityHubLogo from '../../public/unityhub-high-resolution-logo-black-transparent.png'; // Import your logo image
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import UnityHubLogo from "../../public/unityhub-high-resolution-logo-black-transparent.png"; // Import your logo image
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -125,26 +124,25 @@ const Header = () => {
             alt="UnityHub"
             className="h-12 mr-2"
           />
-         
         </Link>
 
         {/* Desktop Navigation */}
-    
-<nav className="hidden md:flex space-x-4">
-  <NavLink to="/" text="Home" />
-  <NavLink to="/e-sign" text="E-Sign" title="DocuSignPro" />
-  <NavLink to="/smart-board" text="SB" title="Smart Board" />
-  <NavLink to="/question-bank" text="QB" title="Question Bank" />
-  <NavLink to="/ai-summarizer" text="AI-S" title="Text Summarizer" />
-  <NavLink to="/expense-tracker" text="ET" title="Expense Tracker" />
-  <NavLink to="/project-tracker" text="PT" title="Project Tracker" />
-  <NavLink to="/invoice-generator" text="IG" title="Invoice Generator" />
-  <NavLink to="/study-plan" text="SP" title="Study Planner" />
-  <NavLink to="/grade-tracker" text="GT" title="Grade Tracker" />
-  {/* <NavLink to="/passport-photo" text="PP" title="Passport Photo" /> */}
-  <NavLink to="/dictionary" text="Dict" title="Dictionary" />
-<NavLink to="/compress" text="Trans" title="Compressor" /> 
-</nav>
+
+        <nav className="hidden md:flex space-x-5">
+          <NavLink to="/" text="Home" />
+          <NavLink to="/e-sign" text="E-Sign" title="DocuSignPro" />
+          <NavLink to="/smart-board" text="SB" title="Smart Board" />
+          <NavLink to="/question-bank" text="QB" title="Question Bank" />
+          <NavLink to="/ai-summarizer" text="AI-S" title="Text Summarizer" />
+          <NavLink to="/expense-tracker" text="ET" title="Expense Tracker" />
+          <NavLink to="/project-tracker" text="PT" title="Project Tracker" />
+          <NavLink to="/invoice-generator" text="IG" title="Invoice Generator"/>
+          <NavLink to="/study-plan" text="SP" title="Study Planner" />
+          <NavLink to="/grade-tracker" text="GT" title="Grade Tracker" />
+          <NavLink to="/password-generator" text="PP" title="Password Generator"/>
+          <NavLink to="/dictionary" text="Dict" title="Dictionary" />
+          <NavLink to="/compress" text="Trans" title="Compressor" />
+        </nav>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
@@ -172,31 +170,84 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden absolute right-1 top-26 rounded-md bg-gray-600 w-56 ${menuOpen ? 'block' : 'hidden'}`} id="menu">
+      <div
+        className={`md:hidden absolute right-1 top-26 rounded-md z-20 bg-gray-600 w-56 ${
+          menuOpen ? "block" : "hidden"
+        }`}
+        id="menu"
+      >
         <div className="px-2 pt-2 pb-3 space-y-1">
           <MobileNavLink to="/" text="Home" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/e-sign" text="DocuSignPro" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/smart-board" text="Smart Board" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/question-bank" text="Question Bank" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/ai-summarizer" text="AI Summarizer" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/expense-tracker" text="Expense Tracker" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/project-tracker" text="Project Tracker" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/invoice-generator" text="Invoice Generator" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/study-plan" text="Study Planner" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/grade-tracker" text="Grade Tracker" toggleMenu={toggleMenu} />
-          {/* <MobileNavLink to="/passport-photo" text="Passport Photo" toggleMenu={toggleMenu} /> */}
-          <MobileNavLink to="/dictionary" text="Dictionary" toggleMenu={toggleMenu} />
-          <MobileNavLink to="/compress" text="Compressor" toggleMenu={toggleMenu} /> 
+          <MobileNavLink
+            to="/e-sign"
+            text="DocuSignPro"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/smart-board"
+            text="Smart Board"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/question-bank"
+            text="Question Bank"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/ai-summarizer"
+            text="AI Summarizer"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/expense-tracker"
+            text="Expense Tracker"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/project-tracker"
+            text="Project Tracker"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/invoice-generator"
+            text="Invoice Generator"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/study-plan"
+            text="Study Planner"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/grade-tracker"
+            text="Grade Tracker"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/password-generator"
+            text="Password Generator"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/dictionary"
+            text="Dictionary"
+            toggleMenu={toggleMenu}
+          />
+          <MobileNavLink
+            to="/compress"
+            text="Compressor"
+            toggleMenu={toggleMenu}
+          />
         </div>
       </div>
     </header>
   );
 };
 
-const NavLink = ({ to, text,title }) => (
+const NavLink = ({ to, text, title }) => (
   <Link
     to={to}
-    className="text-white hover:text-gray-200 transition duration-300 font-semibold text-md"
+    className="text-white hover:text-gray-200 transition duration-300 font-semibold text-[17px] text-center p-1 m-1"
   >
     {title}
   </Link>
@@ -213,7 +264,6 @@ const MobileNavLink = ({ to, text, toggleMenu }) => (
 );
 
 export default Header;
-
 
 // import React, { useState } from "react";
 // import { Link, NavLink } from "react-router-dom";

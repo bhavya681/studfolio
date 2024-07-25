@@ -196,7 +196,7 @@ const App = () => {
           <Route path="/project-tracker" element={<Trail />} />
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/passport-photo" element={<PassportPhotoGenerator />} />
+          <Route path="/password-generator" element={<PassportPhotoGenerator />} />
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/compress" element={<Translator />} />
           <Route path="/signup" element={<SignUp />} />
