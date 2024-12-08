@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { saveAs } from 'file-saver';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const InvoiceGenerator = () => {
   const [invoices, setInvoices] = useState([]);
@@ -12,7 +12,7 @@ const InvoiceGenerator = () => {
     dueDate: '',
     description: '',
     companyName: '',
-    companyAddress: '',
+    companyAddress: '', 
     customerAddress: '',
     invoiceNumber: '',
     invoiceDate: '',
@@ -90,140 +90,121 @@ const InvoiceGenerator = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-10">
-      <h1 className="text-4xl text-center font-bold mb-8">Invoice Generator</h1>
-      <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Invoice Type</label>
-          <select
-            name="type"
-            value={newInvoice.type}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          >
-            <option value="Invoice">Invoice</option>
-            <option value="Tax Invoice">Tax Invoice</option>
-            <option value="Proforma Invoice">Proforma Invoice</option>
-            <option value="Receipt">Receipt</option>
-            <option value="Sales Receipt">Sales Receipt</option>
-            <option value="Cash Receipt">Cash Receipt</option>
-            <option value="Quote">Quote</option>
-            <option value="Estimate">Estimate</option>
-            <option value="Credit Memo">Credit Memo</option>
-            <option value="Credit Note">Credit Note</option>
-            <option value="Purchase Order">Purchase Order</option>
-            <option value="Delivery Note">Delivery Note</option>
-          </select>
-          <input
-            type="text"
-            name="companyName"
-            placeholder="Your Company or Name"
-            value={newInvoice.companyName}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="text"
-            name="companyAddress"
-            placeholder="Address"
-            value={newInvoice.companyAddress}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="text"
-            name="client"
-            placeholder="Client Name"
-            value={newInvoice.client}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="text"
-            name="customerAddress"
-            placeholder="Customer's Billing Address"
-            value={newInvoice.customerAddress}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="number"
-            name="amount"
-            placeholder="Amount"
-            value={newInvoice.amount}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="number"
-            name="tax"
-            placeholder="Tax"
-            value={newInvoice.tax}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="date"
-            name="dueDate"
-            value={newInvoice.dueDate}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="number"
-            name="invoiceNumber"
-            placeholder="Invoice #"
-            value={newInvoice.invoiceNumber}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="date"
-            name="invoiceDate"
-            value={newInvoice.invoiceDate}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={newInvoice.description}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          ></textarea>
-          <textarea
-            name="terms"
-            placeholder="Terms & Conditions"
-            value={newInvoice.terms}
-            onChange={handleInputChange}
-            className="w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          ></textarea>
-          <button
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4"
+    >
+      <motion.h1 
+        initial={{ y: -50 }}
+        animate={{ y: 0 }}
+        className="text-5xl text-center font-bold mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+      >
+        Invoice Generator
+      </motion.h1>
+
+      <motion.div 
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
+        className="max-w-4xl mx-auto"
+      >
+        <motion.div
+          whileHover={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}
+          className="bg-white rounded-2xl shadow-xl p-8 backdrop-blur-lg border border-gray-100"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <motion.select
+              whileTap={{ scale: 0.98 }}
+              name="type"
+              value={newInvoice.type}
+              onChange={handleInputChange}
+              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+            >
+              <option value="Invoice">Invoice</option>
+              <option value="Tax Invoice">Tax Invoice</option>
+              <option value="Proforma Invoice">Proforma Invoice</option>
+              <option value="Receipt">Receipt</option>
+              <option value="Sales Receipt">Sales Receipt</option>
+              <option value="Cash Receipt">Cash Receipt</option>
+              <option value="Quote">Quote</option>
+              <option value="Estimate">Estimate</option>
+              <option value="Credit Memo">Credit Memo</option>
+              <option value="Credit Note">Credit Note</option>
+              <option value="Purchase Order">Purchase Order</option>
+              <option value="Delivery Note">Delivery Note</option>
+            </motion.select>
+
+            {Object.keys(newInvoice).map((key) => {
+              if (key === 'type') return null;
+              
+              return key === 'description' || key === 'terms' ? (
+                <motion.textarea
+                  key={key}
+                  whileFocus={{ scale: 1.02 }}
+                  name={key}
+                  placeholder={key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
+                  value={newInvoice[key]}
+                  onChange={handleInputChange}
+                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 md:col-span-2"
+                />
+              ) : (
+                <motion.input
+                  key={key}
+                  whileFocus={{ scale: 1.02 }}
+                  type={key.includes('date') ? 'date' : key === 'amount' || key === 'tax' || key === 'invoiceNumber' ? 'number' : 'text'}
+                  name={key}
+                  placeholder={key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
+                  value={newInvoice[key]}
+                  onChange={handleInputChange}
+                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                />
+              );
+            })}
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={addInvoice}
-            className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 focus:outline-none"
+            className="w-full mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
           >
-            Add Invoice
-          </button>
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold mb-4">Invoices</h2>
-          {invoices.map((invoice, index) => (
-            <div key={index} className="mb-4 p-4 bg-gray-50 rounded-md shadow-md">
-              <p className="text-lg font-semibold">{invoice.client}</p>
-              <p>Amount: ${invoice.amount}</p>
-              <p>Due Date: {invoice.dueDate}</p>
-              <p>Description: {invoice.description}</p>
-              <button
-                onClick={() => downloadPDF(invoice)}
-                className="mt-2 bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600 focus:outline-none"
+            Generate Invoice
+          </motion.button>
+        </motion.div>
+
+        <motion.div layout className="mt-12 space-y-6">
+          <h2 className="text-3xl font-bold text-gray-800">Your Invoices</h2>
+          <AnimatePresence>
+            {invoices.map((invoice, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                whileHover={{ scale: 1.02 }}
+                className="p-6 bg-white rounded-xl shadow-lg border border-gray-100"
               >
-                Download PDF
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-800">{invoice.client}</h3>
+                    <p className="text-gray-600">Amount: ${invoice.amount}</p>
+                    <p className="text-gray-600">Due: {invoice.dueDate}</p>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => downloadPDF(invoice)}
+                    className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                  >
+                    Download PDF
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

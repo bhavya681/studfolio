@@ -1,112 +1,125 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Documentation = () => {
   return (
-    <div className="bg-gray-100 min-h-screen py-10">
-      <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
-        <h1 className="text-4xl text-center font-bold mb-12">Application Documentation</h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-5xl mx-auto"
+      >
+        <motion.div
+          className="bg-white rounded-2xl shadow-2xl p-12 backdrop-blur-lg border border-gray-100"
+          whileHover={{ boxShadow: "0 25px 30px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+        >
+          <h1 className="text-5xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Application Documentation
+          </h1>
 
-        <p className="text-lg text-center mb-12">
-          Below are the titles for each section to help you navigate the documentation.
-        </p>
+          <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+            Welcome to UnityHub's comprehensive documentation. Navigate through our powerful features and tools using the guide below.
+          </p>
 
-        <div className="text-center mb-12 space-y-2">
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/e-sign</code> | E-Sign -> E-Signature</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/smart-board</code> | SB -> Smart Board</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/question-bank</code> | QB -> Question Bank</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/ai-summarizer</code> | AI-S -> AI Summarizer</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/expense-tracker</code> | ET -> Expense Tracker</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/project-tracker</code> | PT -> Project Tracker</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/invoice-generator</code> | IG -> Invoice Generator</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/study-plan</code> | SP -> Study Planner</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/grade-tracker</code> | GT -> Grade Tracker</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/passport-photo</code> | PP -> Passport Photo</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/dictionary</code> | Dict -> Dictionary</h1>
-          <h1>Route: <code className="bg-gray-200 p-1 rounded">/translate</code> | Trans -> Translate</h1>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {[
+              { route: '/e-sign', short: 'E-Sign', full: 'E-Signature' },
+              { route: '/smart-board', short: 'SB', full: 'Smart Board' },
+              { route: '/question-bank', short: 'QB', full: 'Question Bank' },
+              { route: '/ai-summarizer', short: 'AI-S', full: 'AI Summarizer' },
+              { route: '/expense-tracker', short: 'ET', full: 'Expense Tracker' },
+              { route: '/project-tracker', short: 'PT', full: 'Project Tracker' },
+              { route: '/invoice-generator', short: 'IG', full: 'Invoice Generator' },
+              { route: '/study-plan', short: 'SP', full: 'Study Planner' },
+              { route: '/grade-tracker', short: 'GT', full: 'Grade Tracker' },
+              { route: '/passport-photo', short: 'PP', full: 'Passport Photo' },
+              { route: '/dictionary', short: 'Dict', full: 'Dictionary' },
+              { route: '/translate', short: 'Trans', full: 'Translate' }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.03 }}
+                className="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:border-blue-300 transition-all duration-300"
+              >
+                <code className="text-sm bg-white px-3 py-1 rounded-full border border-gray-200">{item.route}</code>
+                <p className="mt-4 text-lg font-medium text-gray-900">{`${item.short} → ${item.full}`}</p>
+              </motion.div>
+            ))}
+          </div>
 
-        {/* Section for E-Sign Component */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-4">E-Sign Component</h2>
-          <p className="mb-4">Use this component to electronically sign documents.</p>
-          <p className="mb-2">Route: <code className="bg-gray-200 p-1 rounded">/e-sign</code></p>
-          <p>Instructions:</p>
-          <ol className="list-decimal list-inside pl-4">
-            <li>Navigate to the E-Sign page.</li>
-            <li>Upload the document you want to sign.</li>
-            <li>Use the provided tools to add your electronic signature.</li>
-            <li>Save the signed document to your device.</li>
-          </ol>
-        </section>
+          {/* Feature Documentation Sections */}
+          <div className="space-y-16">
+            <motion.section 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-xl"
+            >
+              <h2 className="text-3xl font-bold mb-6 text-gray-800">E-Sign Component</h2>
+              <p className="text-lg text-gray-600 mb-6">Securely sign and manage your documents electronically with our advanced E-Sign solution.</p>
+              <div className="bg-white p-6 rounded-lg">
+                <p className="font-medium mb-4">Quick Start Guide:</p>
+                <ol className="list-decimal list-inside space-y-2 text-gray-700">
+                  <li>Access the E-Sign interface at <code className="bg-gray-100 px-2 py-1 rounded">/e-sign</code></li>
+                  <li>Upload your document (PDF, DOC, DOCX supported)</li>
+                  <li>Choose your signature style or draw a new one</li>
+                  <li>Place and adjust your signature</li>
+                  <li>Download your signed document</li>
+                </ol>
+              </div>
+            </motion.section>
 
-        {/* Section for Smart Board Component */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-4">Smart Board Component</h2>
-          <p className="mb-4">Use this component to create and manage interactive notes and drawings.</p>
-          <p className="mb-2">Route: <code className="bg-gray-200 p-1 rounded">/smart-board</code></p>
-          <p>Instructions:</p>
-          <ol className="list-decimal list-inside pl-4">
-            <li>Navigate to the Smart Board page.</li>
-            <li>Select the drawing or note-taking tool you wish to use.</li>
-            <li>Create your notes or drawings on the board.</li>
-            <li>Save your work or share it with others.</li>
-          </ol>
-        </section>
+            <motion.section 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-r from-purple-50 to-blue-50 p-8 rounded-xl"
+            >
+              <h2 className="text-3xl font-bold mb-6 text-gray-800">Smart Board</h2>
+              <p className="text-lg text-gray-600 mb-6">Transform your ideas into visual masterpieces with our intuitive Smart Board tool.</p>
+              <div className="bg-white p-6 rounded-lg">
+                <p className="font-medium mb-4">Key Features:</p>
+                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                  <li>Real-time collaboration</li>
+                  <li>Multiple canvas styles</li>
+                  <li>Rich drawing tools</li>
+                  <li>Cloud storage integration</li>
+                  <li>Export in multiple formats</li>
+                </ul>
+              </div>
+            </motion.section>
+          </div>
 
-        {/* Example for Invoice Generator Component */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-4">Invoice Generator Component</h2>
-          <p className="mb-4">Use this component to create and manage invoices.</p>
-          <p className="mb-2">Route: <code className="bg-gray-200 p-1 rounded">/invoice-generator</code></p>
-          <p>Instructions:</p>
-          <ol className="list-decimal list-inside pl-4">
-            <li>Navigate to the Invoice Generator page.</li>
-            <li>Enter the details of the invoice, including items and prices.</li>
-            <li>Review the invoice for accuracy.</li>
-            <li>Download or print the invoice for your records.</li>
-          </ol>
-        </section>
-
-        {/* Example for Project Tracker Component */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-4">Project Tracker Component</h2>
-          <p className="mb-4">Use this component to manage engineering projects and collaborate with team members.</p>
-          <p className="mb-2">Route: <code className="bg-gray-200 p-1 rounded">/project-tracker</code></p>
-          <p>Instructions:</p>
-          <ol className="list-decimal list-inside pl-4">
-            <li>Navigate to the Project Tracker page.</li>
-            <li>Create a new project or select an existing project.</li>
-            <li>Add tasks, assign team members, and set deadlines.</li>
-            <li>Track progress and update the status of tasks as they are completed.</li>
-          </ol>
-        </section>
-
-        {/* Additional sections for other components as needed */}
-
-        {/* Information about usage */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4">Usage Information</h2>
-          <p className="mb-4">This application is free to use without any authentication, login, or subscription required.</p>
-          <p className="mb-4">Connect with me:</p>
-          <ul className="flex justify-center space-x-6">
-            <li>
-              <a href="https://www.instagram.com/bhavya_wade/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                Instagram
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/bhavya-wade/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com/wade_bhavy55123" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                Twitter
-              </a>
-            </li>
-          </ul>
-        </section>
-      </div>
+          <motion.footer 
+            className="mt-20 text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-bold mb-6 text-gray-800">Connect With Us</h3>
+            <div className="flex justify-center space-x-8">
+              {[
+                { name: 'LinkedIn', url: 'https://www.linkedin.com/in/bhavya-wade/', icon: '🔗' },
+                { name: 'Twitter', url: 'https://twitter.com/wade_bhavy55123', icon: '🐦' },
+                { name: 'Instagram', url: 'https://www.instagram.com/bhavya_wade/', icon: '📸' }
+              ].map((social, index) => (
+                <motion.a
+                  key={index}
+                  whileHover={{ scale: 1.1 }}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-2 text-blue-600 hover:text-blue-800"
+                >
+                  <span>{social.icon}</span>
+                  <span>{social.name}</span>
+                </motion.a>
+              ))}
+            </div>
+          </motion.footer>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

@@ -1,397 +1,97 @@
-// import  { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import UnityHubLogo from '../../public/unityhub-high-resolution-logo-black-transparent.png'; // Import your logo image
-
-// const Header = () => {
-//   const [menuOpen, setMenuOpen] = useState(false);
-
-//   const toggleMenu = () => {
-//     setMenuOpen(!menuOpen);
-//   };
-
-//   return (
-//     <>
-//       <header className="bg-gradient-to-r from-green-500 to-gray-500 py-4 shadow-md rounded-b-lg shadow-gray-200">
-//         <div className="container mx-auto flex justify-between items-center px-4">
-//           {/* Logo and Title */}
-//           <Link to="/" className="text-white flex items-center">
-//             <img
-//               src={UnityHubLogo} // Use your imported logo image
-//               alt="UnityHub"
-//               className="h-12 mr-2"
-//             />
-
-//           </Link>
-
-//           {/* Desktop Navigation */}
-// <nav className="hidden md:flex space-x-6 mx-4">
-//   <NavLink to="/" text="Home" />
-//   <NavLink to="/e-sign" text="E-Sign" />
-//   <NavLink to="/smart-board" text="Smart Board" />
-//   <NavLink to="/question-bank" text="Question Bank" />
-//   <NavLink to="/ai-summarizer" text="AI Summarizer" />
-//   <NavLink to="/expense-tracker" text="Expense Tracker" />
-//   <NavLink to="/project-tracker" text="Project Tracker" />
-//   <NavLink to="/invoice-generator" text="Invoice Generator" />
-//   <NavLink to="/study-plan" text="Study Planner" />
-//   <NavLink to="/grade-tracker" text="Grade Tracker" />
-// </nav>
-
-//           {/* Mobile Menu Button */}
-//           <div className="md:hidden">
-//             <button
-//               id="menu-btn"
-//               className="text-white focus:outline-none"
-//               onClick={toggleMenu}
-//             >
-//               <svg
-//                 className="w-8 h-8"
-//                 fill="none"
-//                 stroke="currentColor"
-//                 viewBox="0 0 24 24"
-//                 xmlns="http://www.w3.org/2000/svg"
-//               >
-//                 <path
-//                   strokeLinecap="round"
-//                   strokeLinejoin="round"
-//                   strokeWidth="2"
-//                   d="M4 6h16M4 12h16M4 18h16"
-//                 ></path>
-//               </svg>
-//             </button>
-//           </div>
-//         </div>
-
-//         {/* Mobile Menu */}
-//         <div className={`md:hidden ${menuOpen ? 'block' : 'hidden'}`} id="menu">
-//           <div className="px-2 pt-2 pb-3 space-y-1">
-//             <MobileNavLink to="/" text="Home" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/e-sign" text="E-Sign" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/smart-board" text="Smart Board" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/question-bank" text="Question Bank" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/ai-summarizer" text="AI Summarizer" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/expense-tracker" text="Expense Tracker" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/project-tracker" text="Project Tracker" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/invoice-generator" text="Invoice Generator" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/study-plan" text="Study Planner" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/grade-tracker" text="Grade Tracker" toggleMenu={toggleMenu} />
-//           </div>
-//         </div>
-//       </header>
-//     </>
-//   );
-// };
-
-// const NavLink = ({ to, text }) => (
-//   <Link
-//     to={to}
-//     className="text-white hover:text-gray-200 transition duration-300 font-semibold text-lg"
-//   >
-//     {text}
-//   </Link>
-// );
-
-// const MobileNavLink = ({ to, text, toggleMenu }) => (
-//   <Link
-//     to={to}
-//     className="block text-white hover:text-gray-200 transition duration-300 font-semibold text-lg py-2"
-//     onClick={toggleMenu}
-//   >
-//     {text}
-//   </Link>
-// );
-
-// export default Header;
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import UnityHubLogo from "../../public/unityhub-high-resolution-logo-black-transparent.png"; // Import your logo image
+import UnityHubLogo from "../../public/unityhub-high-resolution-logo-black-transparent.png";
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
   };
 
   return (
-    <header className="bg-gradient-to-r from-green-500 to-gray-500 py-4 shadow-md rounded-b-lg shadow-gray-200">
-      <div className="container mx-auto flex justify-between items-center px-4">
-        {/* Logo and Title */}
-        <Link to="/" className="text-white flex items-center">
+    <>
+      {/* Main Header */}
+      <header className="bg-white shadow-md fixed top-0 left-0 right-0 h-16 z-50 flex items-center px-4">
+        <button
+          className="text-gray-700 p-2 hover:bg-gray-100 rounded-lg"
+          onClick={toggleSidebar}
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+
+        <Link to="/" className="flex items-center ml-4">
           <img
-            src={UnityHubLogo} // Use your imported logo image
+            src={UnityHubLogo}
             alt="UnityHub"
-            className="h-12 mr-2"
+            className="h-8 w-auto"
           />
         </Link>
+      </header>
 
-        {/* Desktop Navigation */}
-
-        <nav className="hidden md:flex space-x-5">
-          <NavLink to="/" text="Home" />
-          <NavLink to="/e-sign" text="E-Sign" title="DocuSignPro" />
-          <NavLink to="/smart-board" text="SB" title="Smart Board" />
-          <NavLink to="/question-bank" text="QB" title="Question Bank" />
-          <NavLink to="/ai-summarizer" text="AI-S" title="Text Summarizer" />
-          <NavLink to="/expense-tracker" text="ET" title="Expense Tracker" />
-          <NavLink to="/project-tracker" text="PT" title="Project Tracker" />
-          <NavLink to="/invoice-generator" text="IG" title="Invoice Generator"/>
-          <NavLink to="/study-plan" text="SP" title="Study Planner" />
-          <NavLink to="/grade-tracker" text="GT" title="Grade Tracker" />
-          <NavLink to="/password-generator" text="PP" title="Password Generator"/>
-          <NavLink to="/dictionary" text="Dict" title="Dictionary" />
-          <NavLink to="/compress" text="Trans" title="Compressor" />
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <button
-            id="menu-btn"
-            className="text-white focus:outline-none"
-            onClick={toggleMenu}
-          >
-            <svg
-              className="w-8 h-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
+      {/* Sidebar */}
       <div
-        className={`md:hidden absolute right-1 top-26 rounded-md z-20 bg-gray-600 w-56 ${
-          menuOpen ? "block" : "hidden"
+        className={`fixed top-16 left-0 h-full w-64 bg-gray-800 text-white transform transition-transform duration-300 ease-in-out z-40 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        id="menu"
       >
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          <MobileNavLink to="/" text="Home" toggleMenu={toggleMenu} />
-          <MobileNavLink
-            to="/e-sign"
-            text="DocuSignPro"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/smart-board"
-            text="Smart Board"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/question-bank"
-            text="Question Bank"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/ai-summarizer"
-            text="AI Summarizer"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/expense-tracker"
-            text="Expense Tracker"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/project-tracker"
-            text="Project Tracker"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/invoice-generator"
-            text="Invoice Generator"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/study-plan"
-            text="Study Planner"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/grade-tracker"
-            text="Grade Tracker"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/password-generator"
-            text="Password Generator"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/dictionary"
-            text="Dictionary"
-            toggleMenu={toggleMenu}
-          />
-          <MobileNavLink
-            to="/compress"
-            text="Compressor"
-            toggleMenu={toggleMenu}
-          />
+        <div className="py-6">
+          <nav className="space-y-1 px-3">
+            <SidebarLink to="/" text="Home" icon="🏠" />
+            <SidebarLink to="/e-sign" text="DocuSignPro" icon="📝" />
+            <SidebarLink to="/smart-board" text="Smart Board" icon="📊" />
+            <SidebarLink to="/question-bank" text="Question Bank" icon="❓" />
+            <SidebarLink to="/ai-summarizer" text="Text Summarizer" icon="🤖" />
+            <SidebarLink to="/expense-tracker" text="Expense Tracker" icon="💰" />
+            <SidebarLink to="/project-tracker" text="Project Tracker" icon="📋" />
+            <SidebarLink to="/invoice-generator" text="Invoice Generator" icon="📄" />
+            <SidebarLink to="/study-plan" text="Study Planner" icon="📚" />
+            <SidebarLink to="/grade-tracker" text="Grade Tracker" icon="📈" />
+            <SidebarLink to="/password-generator" text="Password Generator" icon="🔒" />
+            <SidebarLink to="/dictionary" text="Dictionary" icon="📖" />
+            {/* <SidebarLink to="/compress" text="Compressor" icon="🗜️" /> */}
+            <SidebarLink to="/url-shortener" text="URL Shortener" icon="🔗" />
+            {/* <SidebarLink to="/pomodoro-timer" text="Pomodoro Timer" icon="⏲️" />
+            <SidebarLink to="/markdown-previewer" text="Markdown Preview" icon="📝" /> 
+            <SidebarLink to="/qr-code-generator" text="QR Code Generator" icon="📱" />*/}
+          </nav>
         </div>
       </div>
-    </header>
+
+      {/* Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={toggleSidebar}
+        />
+      )}
+
+      {/* Main Content Padding */}
+      <div className="pt-16" />
+    </>
   );
 };
 
-const NavLink = ({ to, text, title }) => (
+const SidebarLink = ({ to, text, icon }) => (
   <Link
     to={to}
-    className="text-white hover:text-gray-200 transition duration-300 font-semibold text-[17px] text-center p-1 m-1"
+    className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg transition-colors duration-200"
   >
-    {title}
-  </Link>
-);
-
-const MobileNavLink = ({ to, text, toggleMenu }) => (
-  <Link
-    to={to}
-    className="block text-white hover:text-gray-200 transition duration-300 font-semibold text-lg py-2 px-4"
-    onClick={toggleMenu}
-  >
-    {text}
+    <span className="mr-3">{icon}</span>
+    <span className="text-sm font-medium">{text}</span>
   </Link>
 );
 
 export default Header;
-
-// import React, { useState } from "react";
-// import { Link, NavLink } from "react-router-dom";
-// import UnityHubLogo from "../../public/unityhub-high-resolution-logo-black-transparent.png"; // Import your logo image
-
-// const Header = () => {
-//   const [menuOpen, setMenuOpen] = useState(false);
-
-//   const toggleMenu = () => {
-//     setMenuOpen(!menuOpen);
-//   };
-
-//   return (
-//     <>
-//       <header className="bg-gradient-to-r from-green-500 to-gray-500 py-4 shadow-md rounded-b-lg shadow-gray-200">
-//         <div className="container mx-auto flex justify-between items-center px-4">
-//           {/* Logo and Title */}
-//           <Link to="/" className="text-white flex items-center">
-//             <img
-//               src={UnityHubLogo} // Use your imported logo image
-//               alt="UnityHub"
-//               className="h-12 mr-2"
-//             />
-//           </Link>
-
-//           <nav className="hidden md:flex space-x-6 mx-4">
-//             <NavLink to="/" text="Home" />
-//             <NavLink to="/e-sign" text="E-Sign" />
-//             <NavLink to="/smart-board" text="Smart Board" />
-//             <NavLink to="/question-bank" text="Question Bank" />
-//             <NavLink to="/ai-summarizer" text="AI Summarizer" />
-//             <NavLink to="/expense-tracker" text="Expense Tracker" />
-//             <NavLink to="/project-tracker" text="Project Tracker" />
-//             <NavLink to="/invoice-generator" text="Invoice Generator" />
-//             <NavLink to="/study-plan" text="Study Planner" />
-//             <NavLink to="/grade-tracker" text="Grade Tracker" />
-//           </nav>
-
-//           {/* Mobile Menu Button */}
-//           <div className="md:hidden">
-//             <button
-//               id="menu-btn"
-//               className="text-white focus:outline-none"
-//               onClick={toggleMenu}
-//             >
-//               <svg
-//                 className="w-8 h-8"
-//                 fill="none"
-//                 stroke="currentColor"
-//                 viewBox="0 0 24 24"
-//                 xmlns="http://www.w3.org/2000/svg"
-//               >
-//                 <path
-//                   strokeLinecap="round"
-//                   strokeLinejoin="round"
-//                   strokeWidth="2"
-//                   d="M4 6h16M4 12h16M4 18h16"
-//                 ></path>
-//               </svg>
-//             </button>
-//           </div>
-//         </div>
-
-//         {/* Mobile Menu */}
-//         <div
-//           className={`md:hidden absolute right-0 top-20 rounded-md bg-gray-600 w-56 ${
-//             menuOpen ? "block" : "hidden"
-//           }`}
-//           id="menu"
-//         >
-//           <div className="px-2 pt-2 pb-3 space-y-1">
-//             <MobileNavLink to="/" text="Home" toggleMenu={toggleMenu} />
-//             <MobileNavLink to="/e-sign" text="E-Sign" toggleMenu={toggleMenu} />
-//             <MobileNavLink
-//               to="/smart-board"
-//               text="Smart Board"
-//               toggleMenu={toggleMenu}
-//             />
-//             <MobileNavLink
-//               to="/question-bank"
-//               text="Question Bank"
-//               toggleMenu={toggleMenu}
-//             />
-//             <MobileNavLink
-//               to="/ai-summarizer"
-//               text="AI Summarizer"
-//               toggleMenu={toggleMenu}
-//             />
-//             <MobileNavLink
-//               to="/expense-tracker"
-//               text="Expense Tracker"
-//               toggleMenu={toggleMenu}
-//             />
-//             <MobileNavLink
-//               to="/project-tracker"
-//               text="Project Tracker"
-//               toggleMenu={toggleMenu}
-//             />
-//             <MobileNavLink
-//               to="/invoice-generator"
-//               text="Invoice Generator"
-//               toggleMenu={toggleMenu}
-//             />
-//             <MobileNavLink
-//               to="/study-plan"
-//               text="Study Planner"
-//               toggleMenu={toggleMenu}
-//             />
-//             <MobileNavLink
-//               to="/grade-tracker"
-//               text="Grade Tracker"
-//               toggleMenu={toggleMenu}
-//             />
-//           </div>
-//         </div>
-//       </header>
-//     </>
-//   );
-// };
-
-// const MobileNavLink = ({ to, text, toggleMenu }) => (
-//   <Link
-//     to={to}
-//     className="block text-white hover:text-gray-200 transition duration-300 font-semibold text-lg py-2 px-4"
-//     onClick={toggleMenu}
-//   >
-//     {text}
-//   </Link>
-// );
-
-// export default Header;

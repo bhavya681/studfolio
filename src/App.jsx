@@ -14,163 +14,119 @@ import Documentation from "./pages/Documentation";
 import Footer from "./components/Footer";
 import Services from "./pages/Services";
 import SignUp from "./pages/SignUp";
-import UnityHubLogo from '../public/unityhub-high-resolution-logo-black-transparent.png'; 
+import UnityHubLogo from "../public/unityhub-high-resolution-logo-black-transparent.png";
 import PassportPhotoGenerator from "./pages/PassportPhotoGenerator";
 import Dictionary from "./pages/Dictionary";
 import Translator from "./pages/Translator";
+import InputForm from "./pages/resume/InputForm";
+import ResumePreview from "./pages/resume/ResumePreview";
+import JobDescriptionAnalyzer from "./pages/resume/JobDescriptionAnalyzer";
+import ATSScore from "./pages/resume/ATSScore";
+import UrlShortener from "./components/UrlShortener";
+import PomodoroTimer from "./components/PomodoroTimer";
+import Markdownreviewer from "./components/Markdownreviewer";
+import QrCodeGenerator from "./components/QrCodeGenerator";
 
 const Home = () => {
   return (
-    <div className="bg-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-gray-100 to-gray-100 text-black py-20">
-        <div className="container mx-auto text-center px-4">
-          <Link
-            to="/"
-            className="text-black text-2xl font-bold hover:animate-pulse flex items-center justify-center"
-          >
-            <img
-              src={
-                UnityHubLogo
-              }
-              alt="UnityHub"
-              className="h-12 mr-2"
-            />
-          </Link>
-          <p className="text-lg md:text-xl mt-4 mb-8">
-            Your platform for seamless productivity
-
-          </p>
-          <Link
-            to="/contacts"
-            className="bg-white text-gray-800 py-2 px-6 rounded-full font-semibold text-lg hover:bg-gray-200 transition duration-300"
-          >
-            Explore Services
-          </Link>
+      <section className="relative h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 via-white to-blue-50">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <Link
+              to="/"
+              className="inline-block transform hover:scale-105 transition-transform duration-300"
+            >
+              <img src={UnityHubLogo} alt="UnityHub" className="h-16 md:h-20 mx-auto" />
+            </Link>
+            <h1 className="mt-8 text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
+              Empower Your Workflow with UnityHub
+            </h1>
+            <p className="mt-6 text-xl md:text-2xl text-gray-600">
+              Your all-in-one platform for seamless productivity and collaboration
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/services"
+                className="px-8 py-4 bg-blue-600 text-white rounded-full text-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                Explore Services
+              </Link>
+              <Link
+                to="/documentation"
+                className="px-8 py-4 bg-white text-blue-600 rounded-full text-lg font-semibold hover:bg-gray-50 border-2 border-blue-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                Learn More
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 cursor-pointer">
-            {/* Feature Item 1 */}
-            <Services
-              icon={
-                <svg
-                  className="w-12 h-12 mx-auto mb-4 text-green-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                  ></path>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Why Choose UnityHub?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg>
-              }
-              title="Easy Integration"
-              description="Integrate seamlessly with your existing tools."
-            />
+              </div>
+              <h3 className="text-xl font-semibold text-center mb-4">Seamless Integration</h3>
+              <p className="text-gray-600 text-center">Connect and sync with your favorite tools effortlessly</p>
+            </div>
 
-            {/* Feature Item 2 */}
-            <Services
-              icon={
-                <svg
-                  className="w-12 h-12 mx-auto mb-4 text-gray-800"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
-                  ></path>
+            <div className="p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="w-16 h-16 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
-              }
-              title="Cloud Storage"
-              description="Securely store and access your data from anywhere."
-            />
+              </div>
+              <h3 className="text-xl font-semibold text-center mb-4">Secure Cloud Storage</h3>
+              <p className="text-gray-600 text-center">Access your data anywhere with enterprise-grade security</p>
+            </div>
 
-            {/* Feature Item 3 */}
-            <Services
-              icon={
-                <svg
-                  className="w-12 h-12 mx-auto mb-4 text-gray-800"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  ></path>
+            <div className="p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div className="w-16 h-16 mx-auto mb-6 bg-purple-100 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
-              }
-              title="Powerful Analytics"
-              description="Gain insights with powerful built-in analytics."
-            />
+              </div>
+              <h3 className="text-xl font-semibold text-center mb-4">Advanced Analytics</h3>
+              <p className="text-gray-600 text-center">Make data-driven decisions with powerful insights</p>
+            </div>
           </div>
         </div>
-      </section>  
+      </section>
 
       {/* About Section */}
-      <section className="py-16">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">About UnityHub</h2>
-            <p className="text-lg text-gray-700">
-              UnityHub is dedicated to providing innovative solutions that
-              enhance productivity across various industries. Our mission is to
-              simplify complex workflows and empower teams to achieve more.
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">About UnityHub</h2>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              UnityHub is more than just a productivity platform. We're on a mission to transform how teams work together, 
+              making collaboration seamless and efficient. Our innovative solutions are designed to help you achieve more 
+              while doing less.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="bg-gradient-to-r from-gray-100 to-gray-100 text-black py-12 text-center">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-          <p className="text-lg mb-8">
-            Sign up today and experience the power of UnityHub.
-          </p>
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Workflow?</h2>
+          <p className="text-xl mb-10 opacity-90">Join thousands of teams already using UnityHub</p>
           <Link
             to="/signup"
-            className="bg-green-400 text-gray-800 py-3 px-8 rounded-full font-semibold text-lg hover:bg-gray-200 transition duration-300"
+            className="inline-block px-8 py-4 bg-white text-blue-600 rounded-full text-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg"
           >
-            Sign Up Now
+            Get Started Free
           </Link>
-        </div>
-      </section>
-
-      {/* Documentation Section */}
-      <section className="bg-gradient-to-r from-gray-100 to-gray-100 text-black py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-8">
-              Need help? Check out our documentation.
-            </h2>
-            <p className="text-lg mb-8">
-              Explore our comprehensive documentation to achieve the most out of
-              UnityHub.
-            </p>
-            <Link
-              to="/documentation"
-              className="bg-gray-200 text-gray-800 py-3 px-8 rounded-full font-semibold text-lg hover:bg-gray-400 transition duration-300"
-            >
-              Documentation
-            </Link>
-          </div>
         </div>
       </section>
     </div>
@@ -179,32 +135,42 @@ const Home = () => {
 
 const App = () => {
   return (
-    <>
-      <Router>
+    <Router>
+      <div className="min-h-screen flex flex-col">
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/e-sign" element={<Esign />} />
-          <Route path="/smart-board" element={<SmartBoard />} />
-          <Route path="/question-bank" element={<QuestionBankGenerator />} />
-          <Route path="/ai-summarizer" element={<AISummarizer />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/study-plan" element={<StudyPlanner />} />
-          <Route path="/grade-tracker" element={<GradeTracker />} />
-          <Route path="/expense-tracker" element={<ExpenseTracker />} />
-          <Route path="/invoice-generator" element={<InvoiceGenerator />} />
-          <Route path="/project-tracker" element={<Trail />} />
-          <Route path="/documentation" element={<Documentation />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/password-generator" element={<PassportPhotoGenerator />} />
-          <Route path="/dictionary" element={<Dictionary />} />
-          <Route path="/compress" element={<Translator />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/contacts" element={<Contact />} />
-        </Routes>
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/e-sign" element={<Esign />} />
+            <Route path="/smart-board" element={<SmartBoard />} />
+            <Route path="/question-bank" element={<QuestionBankGenerator />} />
+            <Route path="/ai-summarizer" element={<AISummarizer />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/study-plan" element={<StudyPlanner />} />
+            <Route path="/grade-tracker" element={<GradeTracker />} />
+            <Route path="/expense-tracker" element={<ExpenseTracker />} />
+            <Route path="/invoice-generator" element={<InvoiceGenerator />} />
+            <Route path="/project-tracker" element={<Trail />} />
+            <Route path="/documentation" element={<Documentation />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/password-generator" element={<PassportPhotoGenerator />} />
+            <Route path="/dictionary" element={<Dictionary />} />
+            <Route path="/compress" element={<Translator />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/resume-builder" element={<InputForm />} />
+            <Route path="/resume-preview" element={<ResumePreview />} />
+            <Route path="/resume-jobdesc" element={<JobDescriptionAnalyzer />} />
+            <Route path="/resume-ats" element={<ATSScore />} />
+            <Route path="/contacts" element={<Contact />} />
+            <Route path="/url-shortener" element={<UrlShortener />} />
+            <Route path="/pomodoro-timer" element={<PomodoroTimer />} />
+            <Route path="/markdown-previewer" element={<Markdownreviewer />} />
+            <Route path="/qr-code-generator" element={<QrCodeGenerator />} />
+          </Routes>
+        </main>
         <Footer />
-      </Router>
-    </>
+      </div>
+    </Router>
   );
 };
 
