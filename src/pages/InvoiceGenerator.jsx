@@ -79,7 +79,9 @@ const InvoiceGenerator = () => {
       head: [['Description', 'Amount', 'Tax']],
       body: [
         [invoice.description, invoice.amount, invoice.tax]
-      ]
+      ],
+      theme: 'striped',
+      headStyles: { fillColor: [66, 88, 255] }
     });
 
     doc.text(`Subtotal: ${parseFloat(invoice.amount)}`, 20, doc.autoTable.previous.finalY + 10);
@@ -93,32 +95,32 @@ const InvoiceGenerator = () => {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4"
+      className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-emerald-50 py-12 px-4"
     >
       <motion.h1 
         initial={{ y: -50 }}
         animate={{ y: 0 }}
-        className="text-5xl text-center font-bold mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+        className="text-6xl text-center font-bold mb-12 bg-gradient-to-r from-violet-600 to-emerald-600 bg-clip-text text-transparent"
       >
-        Invoice Generator
+        Invoice Generator Pro
       </motion.h1>
 
       <motion.div 
         initial={{ y: 20 }}
         animate={{ y: 0 }}
-        className="max-w-4xl mx-auto"
+        className="max-w-5xl mx-auto"
       >
         <motion.div
-          whileHover={{ boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}
-          className="bg-white rounded-2xl shadow-xl p-8 backdrop-blur-lg border border-gray-100"
+          whileHover={{ boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.3)" }}
+          className="bg-white/80 rounded-3xl shadow-2xl p-10 backdrop-blur-xl border border-gray-100"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.select
               whileTap={{ scale: 0.98 }}
               name="type"
               value={newInvoice.type}
               onChange={handleInputChange}
-              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+              className="w-full p-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-300"
             >
               <option value="Invoice">Invoice</option>
               <option value="Tax Invoice">Tax Invoice</option>
@@ -145,7 +147,7 @@ const InvoiceGenerator = () => {
                   placeholder={key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
                   value={newInvoice[key]}
                   onChange={handleInputChange}
-                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 md:col-span-2"
+                  className="w-full p-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-300 md:col-span-2 min-h-[120px] resize-none"
                 />
               ) : (
                 <motion.input
@@ -156,24 +158,24 @@ const InvoiceGenerator = () => {
                   placeholder={key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
                   value={newInvoice[key]}
                   onChange={handleInputChange}
-                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                  className="w-full p-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-300"
                 />
               );
             })}
           </div>
 
           <motion.button
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.02, boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.2)" }}
             whileTap={{ scale: 0.98 }}
             onClick={addInvoice}
-            className="w-full mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+            className="w-full mt-10 bg-gradient-to-r from-violet-600 to-emerald-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            Generate Invoice
+            Generate Professional Invoice
           </motion.button>
         </motion.div>
 
-        <motion.div layout className="mt-12 space-y-6">
-          <h2 className="text-3xl font-bold text-gray-800">Your Invoices</h2>
+        <motion.div layout className="mt-16 space-y-8">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-violet-600 to-emerald-600 bg-clip-text text-transparent">Your Invoices</h2>
           <AnimatePresence>
             {invoices.map((invoice, index) => (
               <motion.div
@@ -181,20 +183,20 @@ const InvoiceGenerator = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, x: -100 }}
-                whileHover={{ scale: 1.02 }}
-                className="p-6 bg-white rounded-xl shadow-lg border border-gray-100"
+                whileHover={{ scale: 1.02, boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.2)" }}
+                className="p-8 bg-white/80 rounded-2xl shadow-xl backdrop-blur-xl border border-gray-100"
               >
                 <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800">{invoice.client}</h3>
-                    <p className="text-gray-600">Amount: ${invoice.amount}</p>
-                    <p className="text-gray-600">Due: {invoice.dueDate}</p>
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-bold text-gray-800">{invoice.client}</h3>
+                    <p className="text-lg text-gray-600">Amount: ${invoice.amount}</p>
+                    <p className="text-lg text-gray-600">Due: {invoice.dueDate}</p>
                   </div>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => downloadPDF(invoice)}
-                    className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                    className="px-8 py-3 bg-gradient-to-r from-violet-600 to-emerald-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-semibold"
                   >
                     Download PDF
                   </motion.button>
