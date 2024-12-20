@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import UnityHubLogo from "../../public/unityhub-high-resolution-logo-black-transparent.png";
+import UnityHubLogo from '../../public/newLogo-removebg-preview.png';
 
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <>
       {/* Main Header */}
-      <header className="bg-white shadow-md fixed top-0 left-0 right-0 h-16 z-50 flex items-center px-4">
+      <header className="bg-gray-900 shadow-md fixed top-0 left-0 right-0 h-16 z-50 flex items-center px-4">
         <button
           className="text-gray-700 p-2 hover:bg-gray-100 rounded-lg"
           onClick={toggleSidebar}
@@ -36,16 +36,15 @@ const Header = () => {
           <img
             src={UnityHubLogo}
             alt="UnityHub"
-            className="h-8 w-auto"
+            className="h-8 w-auto animate-bounce"
           />
         </Link>
       </header>
 
       {/* Sidebar */}
       <div
-        className={`fixed top-16 left-0 h-full w-64 bg-gray-800 text-white transform transition-transform duration-300 ease-in-out z-40 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-16 left-0 h-full w-64 bg-gray-800 text-white transform transition-transform duration-300 ease-in-out z-40 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="py-6">
           <nav className="space-y-1 px-3">

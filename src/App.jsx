@@ -14,7 +14,7 @@ import Documentation from "./pages/Documentation";
 import Footer from "./components/Footer";
 import Services from "./pages/Services";
 import SignUp from "./pages/SignUp";
-import UnityHubLogo from "../public/unityhub-high-resolution-logo-black-transparent.png";
+import UnityHubLogo from "../public/newLogo-removebg-preview.png";
 import PassportPhotoGenerator from "./pages/PassportPhotoGenerator";
 import Dictionary from "./pages/Dictionary";
 import Translator from "./pages/Translator";
@@ -26,23 +26,38 @@ import UrlShortener from "./components/UrlShortener";
 import PomodoroTimer from "./components/PomodoroTimer";
 import Markdownreviewer from "./components/Markdownreviewer";
 import QrCodeGenerator from "./components/QrCodeGenerator";
+import Error4U from "./pages/Error4U";
+import TimeZoneConverter from "./pages/TimeZoneConverter";
+import DataBreachChecker from "./pages/DataBreachChecker";
+import { motion } from 'framer-motion';
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 via-white to-blue-50">
+      <section className="relative h-screen flex items-center justify-center bg-gray-400">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
-            <Link
-              to="/"
-              className="inline-block transform hover:scale-105 transition-transform duration-300"
-            >
-              <img src={UnityHubLogo} alt="UnityHub" className="h-16 md:h-20 mx-auto" />
-            </Link>
-            <h1 className="mt-8 text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
-              Empower Your Workflow with UnityHub
+          <Link to="/" className="inline-block">
+      <motion.div
+        className="transform hover:scale-105 transition-transform duration-300 animate-bounce"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <motion.img
+          src={UnityHubLogo}
+          alt="LearnNova"
+          className="h-16 md:h-20 mx-auto bg-gray-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        />
+      </motion.div>
+    </Link>
+            <h1 class="mt-8 text-4xl md:text-6xl font-bold text-gray-900 leading-tight animate-fade-in">
+              Empower Your Workflow with <span class="text-blue-600">𝓛𝓮𝓪𝓻𝓷𝓷𝓸𝓿𝓪</span>
             </h1>
+
             <p className="mt-6 text-xl md:text-2xl text-gray-600">
               Your all-in-one platform for seamless productivity and collaboration
             </p>
@@ -67,7 +82,7 @@ const Home = () => {
       {/* Features Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Why Choose UnityHub?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Why Choose LearnNova?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <div className="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center">
@@ -102,14 +117,40 @@ const Home = () => {
         </div>
       </section>
 
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">AI Tools at Your Fingertips</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { path: "/cartoon-selfie", label: "Cartoon Selfie" },
+              { path: "/face-cutout", label: "Face Cutout" },
+              { path: "/remove-background", label: "Remove Background" },
+            ].map((tool, index) => (
+              <div
+                key={index}
+                className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+              >
+                <Link
+                  to={tool.path}
+                  className="block text-xl font-semibold text-blue-600 hover:underline"
+                >
+                  {tool.label}
+                </Link>
+                <p className="mt-4 text-gray-600">Try out our powerful AI tools to enhance your tasks.</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">About UnityHub</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">About LearnNova</h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              UnityHub is more than just a productivity platform. We're on a mission to transform how teams work together, 
-              making collaboration seamless and efficient. Our innovative solutions are designed to help you achieve more 
+              LearnNova is more than just a productivity platform. We're on a mission to transform how teams work together,
+              making collaboration seamless and efficient. Our innovative solutions are designed to help you achieve more
               while doing less.
             </p>
           </div>
@@ -120,7 +161,7 @@ const Home = () => {
       <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Workflow?</h2>
-          <p className="text-xl mb-10 opacity-90">Join thousands of teams already using UnityHub</p>
+          <p className="text-xl mb-10 opacity-90">Join thousands of teams already using 𝓛𝓮𝓪𝓻𝓷𝓷𝓸𝓿𝓪</p>
           <Link
             to="/signup"
             className="inline-block px-8 py-4 bg-white text-blue-600 rounded-full text-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg"
@@ -163,9 +204,13 @@ const App = () => {
             <Route path="/resume-ats" element={<ATSScore />} />
             <Route path="/contacts" element={<Contact />} />
             <Route path="/url-shortener" element={<UrlShortener />} />
-            <Route path="/pomodoro-timer" element={<PomodoroTimer />} />
-            <Route path="/markdown-previewer" element={<Markdownreviewer />} />
-            <Route path="/qr-code-generator" element={<QrCodeGenerator />} />
+            <Route path="/timezoneconvertor" element={<TimeZoneConverter />} />
+            <Route path="/databreachchecker" element={<DataBreachChecker />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="*" element={<Error4U />} />
+            <Route path="/cartoon-selfie" element={<PomodoroTimer />} />
+            <Route path="/face-cutout" element={<Markdownreviewer />} />
+            <Route path="/remove-background" element={<QrCodeGenerator />} />
           </Routes>
         </main>
         <Footer />

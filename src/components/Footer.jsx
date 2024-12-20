@@ -1,5 +1,5 @@
 import React from 'react';
-import UnityHubLogo from '../../public/unityhub-high-resolution-logo-black-transparent.png';
+import UnityHubLogo from '../../public/newLogo-removebg-preview.png';
 
 const Footer = () => {
   return (
@@ -9,8 +9,8 @@ const Footer = () => {
           <div className="space-y-8 xl:col-span-1">
             <img
               src={UnityHubLogo}
-              alt="UnityHub"
-              className="h-10 w-auto"
+              alt="LearnNova"
+              className="h-10 w-auto animate-bounce"
             />
             <p className="text-sm">
               Empowering productivity and collaboration with innovative tools and solutions.
@@ -59,7 +59,7 @@ const Footer = () => {
         
         <div className="mt-12 border-t border-gray-700 pt-8">
           <p className="text-sm text-gray-400 text-center">
-            &copy; {new Date().getFullYear()} UnityHub. Developed by Bhavya Wade. All rights reserved.
+            &copy; {new Date().getFullYear()} LearnNova. Developed by Bhavya Wade. All rights reserved.
           </p>
         </div>
       </div>

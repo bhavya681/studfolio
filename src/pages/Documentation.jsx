@@ -19,7 +19,7 @@ const Documentation = () => {
           </h1>
 
           <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-            Welcome to UnityHub's comprehensive documentation. Navigate through our powerful features and tools using the guide below.
+            Welcome to LearnNova's comprehensive documentation. Navigate through our powerful features and tools using the guide below.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
